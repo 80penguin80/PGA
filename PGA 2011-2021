@@ -1,0 +1,34 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data = pd.read_excel('/Users/Owner/OneDrive/Desktop/PGA_Final.xlsx')
+
+distance = data['DISTANCE']
+distance = pd.to_numeric(distance)
+year = data['YEAR']
+
+from importlib import reload
+reload(plt)
+x = data['YEAR'].unique()
+y = data.groupby('YEAR')['DISTANCE'].mean()
+plt.plot(x, y, color='green')
+plt.xlabel("Years")
+plt.ylabel("Distance")
+plt.title("Avg Longest Distance")
+plt.show()
+
+data.groupby('YEAR')['DISTANCE'].mean()
+
+distance_array = np.array(distance)
+plt.figure(figsize = (50,5))
+plt.hist(distance_array, bins=5)
+plt.xlabel('Distance in yds')
+plt.ylabel('Number of Drives')
+plt.title('Longest Drive')
+
+from importlib import reload
+reload(plt)
+data.groupby('YEAR')['ROUNDS'].mean().plot()
+plt.xlabel=('Year')
+plt.ylabel=('Avg Number of Rounds')
+plt.title = ('Avg Rounds per Year')
